@@ -28,7 +28,12 @@ export const GeminiProvider: LLMProvider = {
         { parts: [{ text: geminiPrompt.replace('{tweet}', context.tweetText) }] }
       ];
     }
-    const body = { contents };
+    const body = { 
+      contents,
+      tools: [
+        { google_search: {} }
+      ]
+    };
     const res = await safeFetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
